@@ -279,7 +279,7 @@ async def dessert():
           countRemaining = ods_invasions[invasion]['invasion']['remaining']
           countTotal = ods_invasions[invasion]['invasion']['total']
           countDefeated = int(countTotal) - int(countRemaining)
-          invasions.append("{}: {} ({}/{})".format(districtName, cogType, countDefeated, countTotal))
+          invasions.append("{}: {}".format(districtName, cogType))
       else:
           pass
       
