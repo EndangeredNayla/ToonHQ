@@ -308,6 +308,7 @@ async def fellowship():
   for invasion in ttf_invasions:
       districtName = invasion["districtName"]
       cogType = invasion["cogName"]
+      cogType = cogType.replace("\u0003", "")
       countRemaining = invasion["remaining"]
       countTotal = invasion['total']
       countDefeated = int(countTotal) - int(countRemaining)
