@@ -276,9 +276,6 @@ async def dessert():
       if 'invasion' in ods_invasions[invasion]:
           districtName = invasion
           cogType = ods_invasions[invasion]['invasion']['type']
-          countRemaining = ods_invasions[invasion]['invasion']['remaining']
-          countTotal = ods_invasions[invasion]['invasion']['total']
-          countDefeated = int(countTotal) - int(countRemaining)
           invasions.append("{}: {}".format(districtName, cogType))
       else:
           pass
@@ -315,7 +312,7 @@ async def fellowship():
       countTotal = invasion['total']
       countDefeated = int(countTotal) - int(countRemaining)
       invasions.append("{}: {} ({}/{})".format(districtName, cogType, countDefeated, countTotal))
-  
+
   ttf_invasions = "\n".join(sorted(invasions))
 
   embed = discord.Embed(
@@ -326,7 +323,7 @@ async def fellowship():
   embed.add_field(name="Invasions:", value=ttf_invasions, inline=True)
   embed.set_author(name=client.user.name, icon_url=client.user.avatar.url)
   await channel.send(content=None, embed=embed)
-  
+
 #Run Bot
 TOKEN = os.environ.get("TOKEN")
 client.run(TOKEN)
