@@ -77,15 +77,18 @@ async def rewritten():
   ttr_invasions_json = ttr_invasions_response.json()
   ttr_invasions = ttr_invasions_json["invasions"]
   invasions = []
-  for invasion in list(ttr_invasions.keys()):
-      districtName = invasion
-      cogType = ttr_invasions[invasion]["type"]
-      cogType = cogType.replace("\u0003", "")
-      cogProgress = ttr_invasions[invasion]["progress"]
-      cogProgress = cogProgress.replace("0/1000000", "MEGA Invasion!")
-      invasions.append("{}: {} ({})".format(districtName, cogType, cogProgress))
+  try:
+    for invasion in list(ttr_invasions.keys()):
+        districtName = invasion
+        cogType = ttr_invasions[invasion]["type"]
+        cogType = cogType.replace("\u0003", "")
+        cogProgress = ttr_invasions[invasion]["progress"]
+        cogProgress = cogProgress.replace("0/1000000", "MEGA Invasion!")
+        invasions.append("{}: {} ({})".format(districtName, cogType, cogProgress))
   
-  ttr_invasions = "\n".join(sorted(invasions))
+    ttr_invasions = "\n".join(sorted(invasions))
+  except:
+      ttr_invasions = "No Invasions"
   embed = discord.Embed(
       title=f'Toontown Rewritten Invasions',
       description='\uFEFF',
@@ -137,17 +140,20 @@ async def clash():
   ttcc_invasions = ttcc_invasions_response.json()
   invasions = []
 
-  for invasion in ttcc_invasions:
-      if "None" == invasion['cogs_attacking']:
-          pass
-      else:
-          districtName = invasion['name']
-          cogType = invasion['cogs_attacking']
-          countDefeated = invasion['count_defeated']
-          countTotal = invasion['count_total']
-          invasions.append("{}: {} ({}/{})".format(districtName, cogType, countDefeated, countTotal))
-  
-  ttcc_invasions = "\n".join(sorted(invasions))
+  try:
+    for invasion in ttcc_invasions:
+        if "None" == invasion['cogs_attacking']:
+            pass
+        else:
+            districtName = invasion['name']
+            cogType = invasion['cogs_attacking']
+            countDefeated = invasion['count_defeated']
+            countTotal = invasion['count_total']
+            invasions.append("{}: {} ({}/{})".format(districtName, cogType, countDefeated, countTotal))
+
+    ttcc_invasions = "\n".join(sorted(invasions))
+  except:
+      ttcc_invasions = "No Invasions"
 
   embed = discord.Embed(
       title=f'Corporate Clash Invasions',
@@ -204,16 +210,19 @@ async def tooniversal():
   tvs_invasions = tvs_invasions_json["districts"]
   invasions = []
 
-  for invasion in list(tvs_invasions.keys()):
-      if 'invasion' in tvs_invasions[invasion]:
-          districtName = invasion
-          cogType = tvs_invasions[invasion]['invasion']['type']
-          countRemaining = tvs_invasions[invasion]['invasion']['remaining']
-          countTotal = tvs_invasions[invasion]['invasion']['total']
-          countDefeated = int(countTotal) - int(countRemaining)
-          invasions.append("{}: {} ({}/{})".format(districtName, cogType, countDefeated, countTotal))
-      else:
-          pass
+  try:
+    for invasion in list(tvs_invasions.keys()):
+        if 'invasion' in tvs_invasions[invasion]:
+            districtName = invasion
+            cogType = tvs_invasions[invasion]['invasion']['type']
+            countRemaining = tvs_invasions[invasion]['invasion']['remaining']
+            countTotal = tvs_invasions[invasion]['invasion']['total']
+            countDefeated = int(countTotal) - int(countRemaining)
+            invasions.append("{}: {} ({}/{})".format(districtName, cogType, countDefeated, countTotal))
+        else:
+            pass
+  except:
+      tvs_invasions = "No Invasions"
       
   tvs_invasions = "\n".join(sorted(invasions))
 
@@ -240,12 +249,14 @@ async def dessert():
 
   districts = []
   populationCount = []
-
-  for district in list(ods_districts.keys()):
-      districtName = district
-      popNumber = ods_districts[district]['population']
-      districts.append("{}: {}".format(districtName, popNumber))
-      populationCount.append("{}".format(popNumber))
+  try:
+    for district in list(ods_districts.keys()):
+        districtName = district
+        popNumber = ods_districts[district]['population']
+        districts.append("{}: {}".format(districtName, popNumber))
+        populationCount.append("{}".format(popNumber))
+  except:
+      ttr_invasions = "No Invasions"
   
   
   populationCount = " ".join(populationCount)
@@ -304,15 +315,17 @@ async def fellowship():
   ttf_invasions_json = ttf_invasions_response.json()
   ttf_invasions = ttf_invasions_json["invasions"]
   invasions = []
-
-  for invasion in ttf_invasions:
-      districtName = invasion["districtName"]
-      cogType = invasion["cogName"]
-      cogType = cogType.replace("\u0003", "")
-      countRemaining = invasion["remaining"]
-      countTotal = invasion['total']
-      countDefeated = int(countTotal) - int(countRemaining)
-      invasions.append("{}: {} ({}/{})".format(districtName, cogType, countDefeated, countTotal))
+  try:
+    for invasion in ttf_invasions:
+        districtName = invasion["districtName"]
+        cogType = invasion["cogName"]
+        cogType = cogType.replace("\u0003", "")
+        countRemaining = invasion["remaining"]
+        countTotal = invasion['total']
+        countDefeated = int(countTotal) - int(countRemaining)
+        invasions.append("{}: {} ({}/{})".format(districtName, cogType, countDefeated, countTotal))
+  except:
+      ttf_invasions = "No Invasions"
 
   ttf_invasions = "\n".join(sorted(invasions))
 
